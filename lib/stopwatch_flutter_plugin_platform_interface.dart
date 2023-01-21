@@ -23,10 +23,6 @@ abstract class StopwatchFlutterPluginPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  // Future<String?> getPlatformVersion() {
-  //   throw UnimplementedError('platformVersion() has not been implemented.');
-  // }
-
   Future<bool?> startStopwatch() {
     throw UnimplementedError('startStopwatch() has not been implemented.');
   }
@@ -37,5 +33,9 @@ abstract class StopwatchFlutterPluginPlatform extends PlatformInterface {
 
   Future<bool?> resetStopwatch() {
     throw UnimplementedError('resetStopwatch() has not been implemented.');
+  }
+
+    Stream<int>? get stopwatchStream {  
+    throw UnimplementedError('get stopwatchStream has not been implemented.');;
   }
 }

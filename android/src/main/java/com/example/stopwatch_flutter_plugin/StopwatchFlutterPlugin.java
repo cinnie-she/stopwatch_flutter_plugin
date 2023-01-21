@@ -45,12 +45,7 @@ public class StopwatchFlutterPlugin implements FlutterPlugin, MethodCallHandler,
   }
 
   @Override
-  public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
-    // if (call.method.equals("getPlatformVersion")) {
-    //   result.success("Android " + android.os.Build.VERSION.RELEASE);
-    //   return;
-    // }
-    
+  public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {    
     // when the method called is named 'startStopwatch', 
     if (call.method.equals("startStopwatch")) {
       // call the startStopwatch native function in this class 

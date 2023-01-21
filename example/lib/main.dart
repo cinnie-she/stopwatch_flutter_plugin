@@ -13,7 +13,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  // track if the stopwatch has started for styling the buttons
   bool _stopwatchIsStarted = false;
+  // Get an instance of the plugin for accessing the native stopwatch
   final _stopwatchFlutterPlugin = StopwatchFlutterPlugin();
 
   @override

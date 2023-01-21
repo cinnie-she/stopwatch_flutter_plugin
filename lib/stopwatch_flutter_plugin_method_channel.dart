@@ -9,11 +9,15 @@ class MethodChannelStopwatchFlutterPlugin extends StopwatchFlutterPluginPlatform
   @visibleForTesting
   final methodChannel = const MethodChannel('stopwatch_flutter_plugin');
 
-  // @override
-  // Future<String?> getPlatformVersion() async {
-  //   final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
-  //   return version;
-  // }
+  // setup an event channel to listen from the native side
+  // the name of the eventChannel should match that in the 'StopwatchFlutterPlugin.java' in the android side
+  @visibleForTesting
+  final _eventChannel = const EventChannel('stopwatchStream');
+
+  // Initialize a stream to receive broadcast stream from the eventChannel
+  // Since receiveBroadcastStream returns Stream<dynamic>, we need to cast it back to dart type, 
+  // which is int in this case indicating the time of the stopwatch
+  Stream<int>? _stopwatchStream;
 
   /// invoke the method named 'startTimer' in native code (i.e., Java)
   @override
@@ -34,5 +38,13 @@ class MethodChannelStopwatchFlutterPlugin extends StopwatchFlutterPluginPlatform
   Future<bool?> resetStopwatch() async {
     final status = await methodChannel.invokeMethod<bool>('resetStopwatch');
     return status;
+  }
+
+  // Create a get method for the stream of stopwatch time values
+  @override
+  Stream<int>? get stopwatchStream {  
+    // if the current stream is null, then receive the broadcast stream from the eventChannel
+    _stopwatchStream ??= _eventChannel.receiveBroadcastStream().map<int>((event) => event);
+    return _stopwatchStream;
   }
 }
