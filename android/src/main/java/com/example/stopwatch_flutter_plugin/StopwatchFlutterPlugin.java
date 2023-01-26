@@ -76,7 +76,7 @@ public class StopwatchFlutterPlugin implements FlutterPlugin, MethodCallHandler,
   }
 
   /// The method runs a stopwatch function in a thread, which, the currentTime is incremented by 1 every second
-  boolean startStopwatch(){
+  private boolean startStopwatch(){
     handler.postDelayed(runnable = new Runnable() {
       public void run() {
          handler.postDelayed(runnable, 1000); // delay by 1 second
@@ -89,13 +89,13 @@ public class StopwatchFlutterPlugin implements FlutterPlugin, MethodCallHandler,
   }
 
   /// The method stops the stopwatch
-  boolean stopStopwatch(){
+  private boolean stopStopwatch(){
     handler.removeCallbacks(runnable);
     return true;
   }
 
   /// The method stops the stopwatch and reset the stopwatch current time to zero
-  boolean resetStopwatch(){
+  private boolean resetStopwatch(){
     handler.removeCallbacks(runnable);
     currentTime = 0;
     // Update the stopwatch time value to the dart side through the event channel
